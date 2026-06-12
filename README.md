@@ -4,6 +4,26 @@
 
 基于 **Astro** 构建的个人技术博客，采用 Blueprint（蓝图）视觉风格——深色主题搭配工程网格背景，展示后端开发经验、项目实践与技术思考。面向技术面试官、HR 和技术同行。
 
+## 效果预览
+
+### 首页（浅色）
+![首页](public/screenshots/home-light.png)
+
+### 博客列表
+![博客列表](public/screenshots/blog.png)
+
+### 文章详情
+![文章详情](public/screenshots/article.png)
+
+### 项目展示
+![项目展示](public/screenshots/projects.png)
+
+### 技术栈
+![技术栈](public/screenshots/skills.png)
+
+### 联系我
+![联系我](public/screenshots/contact.png)
+
 ## 技术栈
 
 | 层面 | 技术 | 版本 |
