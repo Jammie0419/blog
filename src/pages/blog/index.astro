@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../../components/Card.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Get all unique tags
+const allTags = [...new Set(allPosts.flatMap(p => p.data.tags || []))].sort();
+
+// Get selected tag from URL
+const url = Astro.url;
+const selectedTag = url.searchParams.get('tag');
+
+const posts = selectedTag
+  ? allPosts.filter(p => p.data.tags?.includes(selectedTag))
+  : allPosts;
+---
+
+<BaseLayout title="博客 - 技术文章" description="后端开发技术文章与实践经验分享">
+  <div class="container-narrow" style="padding-top: 3rem; padding-bottom: 4rem;">
+    <!-- Header -->
+    <header style="margin-bottom: 3rem;">
+      <div style="
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+        margin-bottom: 0.5rem;
+      ">
+        <h1 style="
+          font-size: 2rem;
+          font-weight: 700;
+          color: var(--text);
+        ">
+          <span style="color: var(--accent); margin-right: 0.5rem;">//</span>
+          技术博客
+        </h1>
+      </div>
+      <p style="
+        font-size: 0.95rem;
+        color: var(--text-dim);
+        line-height: 1.7;
+      ">
+        记录后端开发中的技术思考、实践总结与学习笔记。
+      </p>
+      <div style="
+        height: 1px;
+        background: var(--border);
+        margin-top: 1.5rem;
+      "></div>
+    </header>
+
+    <!-- Tag Filter -->
+    {allTags.length > 0 && (
+      <div style="margin-bottom: 2rem;">
+        <div style="
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+        ">
+          <span style="
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+          ">
+            筛选:
+          </span>
+          <a
+            href="/blog"
+            class:list={["tag", selectedTag ? '' : 'active-tag']}
+          >
+            全部 ({allPosts.length})
+          </a>
+          {allTags.map(tag => (
+            <a
+              href={`/blog?tag=${encodeURIComponent(tag)}`}
+              class="tag"
+              class:list={[selectedTag === tag ? 'active-tag' : '']}
+            >
+              {tag} ({allPosts.filter(p => p.data.tags?.includes(tag)).length})
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Post count -->
+    <p style="
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    ">
+      {selectedTag
+        ? `找到 ${posts.length} 篇关于 "${selectedTag}" 的文章`
+        : `共 ${posts.length} 篇文章`
+      }
+    </p>
+
+    <!-- Posts Grid -->
+    {posts.length > 0 ? (
+      <div style="
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      ">
+        {posts.map(post => (
+          <Card post={post} />
+        ))}
+      </div>
+    ) : (
+      <div style="text-align: center; padding: 4rem 0;">
+        <p style="
+          font-family: var(--font-mono);
+          color: var(--text-muted);
+          font-size: 0.9rem;
+        ">
+          // 暂无匹配的文章
+        </p>
+        <a href="/blog" class="bp-btn" style="margin-top: 1rem;">
+          查看全部文章
+        </a>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .active-tag {
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+    background: var(--accent-glow) !important;
+  }
+</style>

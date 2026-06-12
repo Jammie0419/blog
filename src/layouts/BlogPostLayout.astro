@@ -1,0 +1,126 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { data } = post;
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('zh-CN', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).replace(/\//g, '-');
+}
+---
+
+<BaseLayout title={`${data.title} | 博客`} description={data.description}>
+  <article class="container-narrow" style="padding-top: 3rem; padding-bottom: 4rem;">
+    <!-- Back link -->
+    <a
+      href="/blog"
+      style="
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--text-dim);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        transition: color 0.2s ease;
+      "
+    >
+      ← 返回博客列表
+    </a>
+
+    <!-- Post header -->
+    <header style="margin-bottom: 3rem;">
+      <div style="
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+        flex-wrap: wrap;
+      ">
+        <time style="
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          color: var(--text-muted);
+          letter-spacing: 0.05em;
+        ">
+          {formatDate(data.pubDate)}
+        </time>
+        {data.updatedDate && (
+          <span style="
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+          ">
+            (更新于 {formatDate(data.updatedDate)})
+          </span>
+        )}
+        {data.tags?.map(tag => (
+          <span class="tag">{tag}</span>
+        ))}
+      </div>
+
+      <h1 style="
+        font-size: clamp(1.5rem, 4vw, 2.2rem);
+        font-weight: 700;
+        line-height: 1.3;
+        margin-bottom: 1rem;
+        color: var(--text);
+      ">
+        {data.title}
+      </h1>
+
+      <p style="
+        font-size: 1.05rem;
+        color: var(--text-dim);
+        line-height: 1.7;
+      ">
+        {data.description}
+      </p>
+
+      <div style="
+        height: 1px;
+        background: var(--border);
+        margin-top: 2rem;
+      "></div>
+    </header>
+
+    <!-- Post content -->
+    <div class="prose">
+      <slot />
+    </div>
+
+    <!-- Post footer -->
+    <div style="
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    ">
+      <div style="
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+      ">
+        {data.tags?.map(tag => (
+          <span class="tag" style="font-size: 0.8rem; padding: 0.3em 0.8em;">{tag}</span>
+        ))}
+      </div>
+
+      <a
+        href="/blog"
+        class="bp-btn"
+      >
+        ← 返回博客列表
+      </a>
+    </div>
+  </article>
+</BaseLayout>

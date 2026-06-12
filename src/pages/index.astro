@@ -1,0 +1,312 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 4);
+---
+
+<BaseLayout title="首页 - 个人技术博客" description="后端开发工程师个人博客，分享技术心得与项目经验">
+  <!-- ═══ Hero Section ═══ -->
+  <section style="
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 0;
+    position: relative;
+  ">
+    <!-- Decorative crosshairs -->
+    <div class="crosshair fade-in fade-in-1" style="
+      position: absolute;
+      top: 3rem; left: 3rem;
+      opacity: 0.3;
+    "></div>
+    <div class="crosshair fade-in fade-in-2" style="
+      position: absolute;
+      top: 3rem; right: 3rem;
+      opacity: 0.3;
+    "></div>
+    <div class="crosshair fade-in fade-in-3" style="
+      position: absolute;
+      bottom: 3rem; left: 3rem;
+      opacity: 0.3;
+    "></div>
+    <div class="crosshair fade-in fade-in-4" style="
+      position: absolute;
+      bottom: 3rem; right: 3rem;
+      opacity: 0.3;
+    "></div>
+
+    <div class="container-narrow" style="text-align: center; max-width: 700px;">
+      <!-- Status indicator -->
+      <div class="fade-in fade-in-1" style="
+        display: inline-flex;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+        padding: 0.4em 1em;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+      ">
+        <span class="status-dot"></span>
+        Available for opportunities
+      </div>
+
+      <!-- Name -->
+      <h1 class="fade-in fade-in-2" style="
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 700;
+        line-height: 1.1;
+        margin-bottom: 1rem;
+        letter-spacing: -0.03em;
+        color: var(--text);
+      ">
+        <span style="color: var(--text-muted); font-weight: 400; font-size: 0.5em;">$ echo</span><br />
+        <span style="
+          background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        ">
+          Your Name
+        </span>
+      </h1>
+
+      <!-- Role with cursor -->
+      <p class="fade-in fade-in-3 cursor-blink" style="
+        font-family: var(--font-mono);
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+        color: var(--text-dim);
+        margin-bottom: 2rem;
+        letter-spacing: 0.02em;
+      ">
+        后端工程师 · 系统架构 · 分布式
+      </p>
+
+      <!-- Description -->
+      <p class="fade-in fade-in-4" style="
+        font-size: 1rem;
+        color: var(--text-muted);
+        line-height: 1.8;
+        max-width: 550px;
+        margin: 0 auto 2.5rem;
+      ">
+        专注于构建高性能后端服务与分布式系统。<br />
+        热爱技术分享，记录成长路上的思考与实践。
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="fade-in fade-in-5" style="
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      ">
+        <a href="/projects" class="bp-btn bp-btn--filled">
+          查看项目 →
+        </a>
+        <a href="/blog" class="bp-btn">
+          技术博客
+        </a>
+        <a href="/contact" class="bp-btn">
+          联系我
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Divider ═══ -->
+  <div class="bp-divider container-narrow">
+    <span>Recent Posts</span>
+  </div>
+
+  <!-- ═══ Recent Posts ═══ -->
+  <section class="container-narrow" style="padding-bottom: 2rem;">
+    {posts.length > 0 ? (
+      <div style="
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+      ">
+        {posts.map((post, i) => (
+          <Card post={post} />
+        ))}
+      </div>
+    ) : (
+      <div style="text-align: center; padding: 4rem 0;">
+        <p style="
+          font-family: var(--font-mono);
+          color: var(--text-muted);
+          font-size: 0.9rem;
+        ">
+          // 暂无文章，即将发布...
+        </p>
+      </div>
+    )}
+
+    {posts.length > 0 && (
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="/blog" class="bp-btn">
+          查看全部文章 →
+        </a>
+      </div>
+    )}
+  </section>
+
+  <!-- ═══ Divider ═══ -->
+  <div class="bp-divider container-narrow">
+    <span>Featured Projects</span>
+  </div>
+
+  <!-- ═══ Featured Projects Preview ═══ -->
+  <section class="container-narrow" style="padding-bottom: 4rem;">
+    <div style="
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    ">
+      <!-- Project Card 1 -->
+      <div class="bp-card" style="padding: 1.5rem;">
+        <div style="
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          margin-bottom: 1rem;
+        ">
+          <span style="
+            width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+          ">⚙</span>
+          <h3 style="
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--text);
+          ">
+            高并发 API 网关
+          </h3>
+        </div>
+        <p style="
+          font-size: 0.85rem;
+          color: var(--text-dim);
+          line-height: 1.7;
+          margin-bottom: 1rem;
+        ">
+          基于 Go 的高性能 API 网关，支持限流、鉴权、负载均衡，单节点 QPS 10w+。
+        </p>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <span class="tag">Go</span>
+          <span class="tag">gRPC</span>
+          <span class="tag">Redis</span>
+        </div>
+      </div>
+
+      <!-- Project Card 2 -->
+      <div class="bp-card" style="padding: 1.5rem;">
+        <div style="
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          margin-bottom: 1rem;
+        ">
+          <span style="
+            width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+          ">◈</span>
+          <h3 style="
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--text);
+          ">
+            微服务脚手架
+          </h3>
+        </div>
+        <p style="
+          font-size: 0.85rem;
+          color: var(--text-dim);
+          line-height: 1.7;
+          margin-bottom: 1rem;
+        ">
+          Spring Cloud 微服务最佳实践模板，集成服务发现、配置中心、链路追踪等核心组件。
+        </p>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <span class="tag">Java</span>
+          <span class="tag">Spring Cloud</span>
+          <span class="tag">Docker</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="/projects" class="bp-btn">
+        查看全部项目 →
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ Tech Stack Marquee ═══ -->
+  <section style="
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 0;
+    overflow: hidden;
+    background: var(--bg-elevated);
+  ">
+    <div class="container-wide" style="text-align: center;">
+      <p style="
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      ">
+        Tech Stack
+      </p>
+      <div style="
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--text-dim);
+      ">
+        <span>Java</span>
+        <span style="color: var(--text-muted)">·</span>
+        <span>Go</span>
+        <span style="color: var(--text-muted)">·</span>
+        <span>Spring Boot</span>
+        <span style="color: var(--text-muted)">·</span>
+        <span>MySQL</span>
+        <span style="color: var(--text-muted)">·</span>
+        <span>Redis</span>
+        <span style="color: var(--text-muted)">·</span>
+        <span>Kafka</span>
+        <span style="color: var(--text-muted)">·</span>
+        <span>Docker</span>
+        <span style="color: var(--text-muted)">·</span>
+        <span>K8s</span>
+        <span style="color: var(--text-muted)">·</span>
+        <span>gRPC</span>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

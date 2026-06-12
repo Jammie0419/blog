@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(cd \"E:/lzm/2026/test\" && rm -rf node_modules dist .astro public src package-lock.json astro.config.mjs tsconfig.json)",
+      "Bash(cd \"E:/lzm/2026/test\" && mkdir -p src/styles src/layouts src/components src/pages/blog src/content/blog public)"
+    ]
+  }
+}

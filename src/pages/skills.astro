@@ -1,0 +1,282 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface SkillCategory {
+  name: string;
+  icon: string;
+  skills: { name: string; level: number; note?: string }[];
+}
+
+const categories: SkillCategory[] = [
+  {
+    name: '编程语言',
+    icon: '{ }',
+    skills: [
+      { name: 'Java', level: 90, note: '3+ 年经验' },
+      { name: 'Go', level: 75, note: '1+ 年经验' },
+      { name: 'TypeScript', level: 70 },
+      { name: 'Python', level: 60 },
+      { name: 'SQL', level: 85 },
+    ],
+  },
+  {
+    name: '框架 & 中间件',
+    icon: '◈',
+    skills: [
+      { name: 'Spring Boot / Cloud', level: 90 },
+      { name: 'MyBatis / JPA', level: 85 },
+      { name: 'gRPC', level: 75 },
+      { name: 'Netty', level: 65 },
+    ],
+  },
+  {
+    name: '数据库 & 存储',
+    icon: '⬡',
+    skills: [
+      { name: 'MySQL', level: 85, note: '索引优化 / 分库分表' },
+      { name: 'Redis', level: 85, note: '集群 / 缓存策略' },
+      { name: 'ClickHouse', level: 60 },
+      { name: 'MongoDB', level: 55 },
+      { name: 'Elasticsearch', level: 65 },
+    ],
+  },
+  {
+    name: '基础设施',
+    icon: '⚙',
+    skills: [
+      { name: 'Docker', level: 80 },
+      { name: 'Kubernetes', level: 60 },
+      { name: 'CI/CD', level: 75 },
+      { name: 'Linux', level: 80 },
+      { name: 'Nginx', level: 70 },
+    ],
+  },
+  {
+    name: '消息 & 分布式',
+    icon: '⟐',
+    skills: [
+      { name: 'Kafka', level: 80 },
+      { name: 'RabbitMQ', level: 70 },
+      { name: 'ZooKeeper', level: 65 },
+      { name: 'Etcd', level: 55 },
+      { name: '分布式事务', level: 60 },
+    ],
+  },
+  {
+    name: '监控 & 工具',
+    icon: '◉',
+    skills: [
+      { name: 'Prometheus + Grafana', level: 75 },
+      { name: 'ELK Stack', level: 65 },
+      { name: 'SkyWalking', level: 60 },
+      { name: 'Git', level: 90 },
+    ],
+  },
+];
+---
+
+<BaseLayout title="技能 - 技术栈" description="我的技术技能栈与熟练度">
+  <div class="container-narrow" style="padding-top: 3rem; padding-bottom: 4rem;">
+    <!-- Header -->
+    <header style="margin-bottom: 3rem;">
+      <h1 style="
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+      ">
+        <span style="color: var(--accent); margin-right: 0.5rem;">//</span>
+        技术栈
+      </h1>
+      <p style="
+        font-size: 0.95rem;
+        color: var(--text-dim);
+      ">
+        我的技术技能栈与熟练度评估
+      </p>
+      <div style="height: 1px; background: var(--border); margin-top: 1.5rem;"></div>
+    </header>
+
+    <!-- Skills Legend -->
+    <div style="
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    ">
+      <span style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="display: inline-block; width: 24px; height: 4px; background: var(--accent); border-radius: 2px;"></span>
+        精通 (80%+)
+      </span>
+      <span style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="display: inline-block; width: 24px; height: 4px; background: var(--accent-dim); border-radius: 2px;"></span>
+        熟练 (60-80%)
+      </span>
+      <span style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="display: inline-block; width: 24px; height: 4px; background: var(--border); border-radius: 2px;"></span>
+        了解 (&lt;60%)
+      </span>
+    </div>
+
+    <!-- Skills by Category -->
+    <div style="display: flex; flex-direction: column; gap: 2.5rem;">
+      {categories.map(category => (
+        <div>
+          <!-- Category header -->
+          <div style="
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+          ">
+            <span style="
+              font-family: var(--font-mono);
+              font-size: 0.8rem;
+              color: var(--accent);
+              border: 1px solid var(--accent);
+              border-radius: 4px;
+              padding: 0.2em 0.5em;
+            ">
+              {category.icon}
+            </span>
+            <h2 style="
+              font-family: var(--font-mono);
+              font-size: 1.1rem;
+              color: var(--text);
+              margin: 0;
+            ">
+              {category.name}
+            </h2>
+            <div style="flex: 1; height: 1px; background: var(--border);"></div>
+          </div>
+
+          <!-- Skills list -->
+          <div style="
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+          ">
+            {category.skills.map(skill => (
+              <div style="
+                background: var(--bg-card);
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                padding: 1rem 1.25rem;
+                transition: all 0.2s ease;
+              ">
+                <div style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: baseline;
+                  margin-bottom: 0.75rem;
+                ">
+                  <span style="
+                    font-family: var(--font-mono);
+                    font-size: 0.85rem;
+                    color: var(--text);
+                  ">
+                    {skill.name}
+                  </span>
+                  <span style="
+                    font-family: var(--font-mono);
+                    font-size: 0.7rem;
+                    color: var(--text-muted);
+                  ">
+                    {skill.level}%
+                  </span>
+                </div>
+
+                <!-- Skill bar -->
+                <div class="skill-bar">
+                  <div
+                    class="skill-bar-fill"
+                    style={`width: ${skill.level}%`}
+                  ></div>
+                </div>
+
+                {skill.note && (
+                  <div style="
+                    margin-top: 0.5rem;
+                    font-family: var(--font-mono);
+                    font-size: 0.65rem;
+                    color: var(--text-muted);
+                  ">
+                    {skill.note}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Divider -->
+    <div class="bp-divider"><span>Learning Now</span></div>
+
+    <!-- Currently Learning -->
+    <div style="
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+    ">
+      <div class="bp-card" style="padding: 1.25rem;">
+        <div style="
+          font-family: var(--font-mono);
+          font-size: 0.7rem;
+          color: var(--accent);
+          letter-spacing: 0.1em;
+          margin-bottom: 0.5rem;
+        ">
+          IN PROGRESS
+        </div>
+        <h3 style="
+          font-family: var(--font-mono);
+          font-size: 0.95rem;
+          color: var(--text);
+          margin-bottom: 0.5rem;
+        ">
+          Rust 语言
+        </h3>
+        <p style="
+          font-size: 0.8rem;
+          color: var(--text-dim);
+          line-height: 1.6;
+          margin: 0;
+        ">
+          探索系统级编程，学习所有权模型与异步运行时。
+        </p>
+      </div>
+
+      <div class="bp-card" style="padding: 1.25rem;">
+        <div style="
+          font-family: var(--font-mono);
+          font-size: 0.7rem;
+          color: var(--accent);
+          letter-spacing: 0.1em;
+          margin-bottom: 0.5rem;
+        ">
+          IN PROGRESS
+        </div>
+        <h3 style="
+          font-family: var(--font-mono);
+          font-size: 0.95rem;
+          color: var(--text);
+          margin-bottom: 0.5rem;
+        ">
+          Service Mesh
+        </h3>
+        <p style="
+          font-size: 0.8rem;
+          color: var(--text-dim);
+          line-height: 1.6;
+          margin: 0;
+        ">
+          深入研究 Istio 与 Envoy，理解服务网格的数据面与控制面。
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

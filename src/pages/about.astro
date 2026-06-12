@@ -1,0 +1,246 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="关于我 - 后端开发工程师" description="了解我的背景、经历和技术理念">
+  <div class="container-narrow" style="padding-top: 3rem; padding-bottom: 4rem;">
+    <!-- Header -->
+    <header style="margin-bottom: 3rem;">
+      <h1 style="
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+      ">
+        <span style="color: var(--accent); margin-right: 0.5rem;">//</span>
+        关于我
+      </h1>
+      <p style="
+        font-size: 0.95rem;
+        color: var(--text-dim);
+      ">
+        了解我的背景、经历和技术理念
+      </p>
+      <div style="height: 1px; background: var(--border); margin-top: 1.5rem;"></div>
+    </header>
+
+    <!-- System Architecture Diagram (decorative) -->
+    <div style="
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+      white-space: pre;
+      overflow-x: auto;
+    ">
+<span style="color: var(--accent);">┌─────────────┐</span>    <span style="color: var(--accent);">┌─────────────┐</span>    <span style="color: var(--accent);">┌─────────────┐</span>
+<span style="color: var(--accent);">│</span>   Client    <span style="color: var(--accent);">│───▶│</span>   API GW    <span style="color: var(--accent);">│───▶│</span>   Service   <span style="color: var(--accent);">│</span>
+<span style="color: var(--accent);">└─────────────┘</span>    <span style="color: var(--accent);">└─────────────┘</span>    <span style="color: var(--accent);">└──────┬──────┘</span>
+                                                    <span style="color: var(--text-muted);">│</span>
+                                           <span style="color: var(--accent);">┌──────┴──────┐</span>
+                                           <span style="color: var(--accent);">│</span>  Data Layer <span style="color: var(--accent);">│</span>
+                                           <span style="color: var(--accent);">└─────────────┘</span>
+    </div>
+
+    <!-- About Content -->
+    <div class="prose">
+      <h2>我是谁</h2>
+      <p>
+        一名热爱技术的后端工程师，专注于构建高性能、高可用的分布式系统。
+        擅长使用 Java、Go 等语言进行服务端开发，对系统架构设计有深入的实践经验。
+      </p>
+      <p>
+        我相信好的代码不仅是能运行的，更是可读、可维护、可演进的。
+        在日常工作中，我追求代码质量与工程效率的平衡，注重技术选型背后的思考过程。
+      </p>
+
+      <h2>技术理念</h2>
+      <p>
+        <strong>简单优于复杂</strong> — 能用简单方案解决的问题，就不要引入不必要的复杂度。
+        好的架构不是一开始就设计出来的，而是在实践中不断演进的。
+      </p>
+      <blockquote>
+        "任何傻瓜都能写出计算机能理解的代码。好的程序员写出人类能理解的代码。"
+        — Martin Fowler
+      </blockquote>
+      <p>
+        <strong>数据驱动决策</strong> — 性能优化、技术选型、架构改进，都应该基于数据而非直觉。
+        监控、指标、日志是系统可靠性的基石。
+      </p>
+    </div>
+
+    <!-- Divider -->
+    <div class="bp-divider"><span>Experience</span></div>
+
+    <!-- Timeline -->
+    <h2 style="
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 2rem;
+    ">
+      经历 & 教育
+    </h2>
+
+    <div style="margin-bottom: 3rem;">
+      <div class="timeline-item">
+        <div style="
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          color: var(--accent);
+          margin-bottom: 0.25rem;
+        ">
+          2024 - 至今
+        </div>
+        <h3 style="
+          font-family: var(--font-mono);
+          font-size: 1rem;
+          color: var(--text);
+          margin-bottom: 0.25rem;
+        ">
+          后端开发工程师
+        </h3>
+        <p style="
+          font-size: 0.85rem;
+          color: var(--text-muted);
+          margin-bottom: 0.5rem;
+        ">
+          某科技有限公司
+        </p>
+        <p style="
+          font-size: 0.9rem;
+          color: var(--text-dim);
+          line-height: 1.7;
+        ">
+          负责核心业务系统的后端开发与架构设计，参与微服务拆分与性能优化，
+          将系统响应时间降低 40%。
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div style="
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          color: var(--accent);
+          margin-bottom: 0.25rem;
+        ">
+          2020 - 2024
+        </div>
+        <h3 style="
+          font-family: var(--font-mono);
+          font-size: 1rem;
+          color: var(--text);
+          margin-bottom: 0.25rem;
+        ">
+          计算机科学与技术 · 本科
+        </h3>
+        <p style="
+          font-size: 0.85rem;
+          color: var(--text-muted);
+          margin-bottom: 0.5rem;
+        ">
+          某大学
+        </p>
+        <p style="
+          font-size: 0.9rem;
+          color: var(--text-dim);
+          line-height: 1.7;
+        ">
+          系统学习计算机基础理论，重点研究分布式系统与数据库原理。
+          在校期间参与多个开源项目，获得校级优秀毕业设计。
+        </p>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="bp-divider"><span>Principles</span></div>
+
+    <!-- Principles Grid -->
+    <div style="
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    ">
+      <div class="bp-card" style="padding: 1.5rem;">
+        <div style="
+          font-family: var(--font-mono);
+          font-size: 1.5rem;
+          color: var(--accent);
+          margin-bottom: 0.75rem;
+        ">01</div>
+        <h3 style="
+          font-family: var(--font-mono);
+          font-size: 0.95rem;
+          color: var(--text);
+          margin-bottom: 0.5rem;
+        ">
+          代码即文档
+        </h3>
+        <p style="
+          font-size: 0.85rem;
+          color: var(--text-dim);
+          line-height: 1.7;
+          margin: 0;
+        ">
+          好的代码自解释，注释补充为什么而非做什么。
+        </p>
+      </div>
+
+      <div class="bp-card" style="padding: 1.5rem;">
+        <div style="
+          font-family: var(--font-mono);
+          font-size: 1.5rem;
+          color: var(--accent);
+          margin-bottom: 0.75rem;
+        ">02</div>
+        <h3 style="
+          font-family: var(--font-mono);
+          font-size: 0.95rem;
+          color: var(--text);
+          margin-bottom: 0.5rem;
+        ">
+          测试即保障
+        </h3>
+        <p style="
+          font-size: 0.85rem;
+          color: var(--text-dim);
+          line-height: 1.7;
+          margin: 0;
+        ">
+          没有测试的代码就像没有刹车的车，能跑但不敢加速。
+        </p>
+      </div>
+
+      <div class="bp-card" style="padding: 1.5rem;">
+        <div style="
+          font-family: var(--font-mono);
+          font-size: 1.5rem;
+          color: var(--accent);
+          margin-bottom: 0.75rem;
+        ">03</div>
+        <h3 style="
+          font-family: var(--font-mono);
+          font-size: 0.95rem;
+          color: var(--text);
+          margin-bottom: 0.5rem;
+        ">
+          监控即眼睛
+        </h3>
+        <p style="
+          font-size: 0.85rem;
+          color: var(--text-dim);
+          line-height: 1.7;
+          margin: 0;
+        ">
+          没有监控的系统就像闭着眼睛开车，出事是迟早的事。
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

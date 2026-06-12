@@ -1,0 +1,38 @@
+---
+export interface Props {
+  label: string;
+  href?: string;
+  size?: 'sm' | 'md';
+}
+
+const { label, href, size = 'sm' } = Astro.props;
+const TagEl = href ? 'a' : 'span';
+---
+
+<TagEl
+  href={href || undefined}
+  class="tag-pill"
+  style:define={{
+    display: 'inline-block',
+    fontFamily: 'var(--font-mono)',
+    fontSize: size === 'sm' ? '0.7rem' : '0.8rem',
+    padding: size === 'sm' ? '0.2em 0.6em' : '0.3em 0.8em',
+    border: '1px solid var(--border)',
+    borderRadius: '3px',
+    color: 'var(--text-dim)',
+    background: 'var(--bg-elevated)',
+    transition: 'all 0.2s ease',
+    textDecoration: 'none',
+    cursor: href ? 'pointer' : 'default',
+  }}
+>
+  {label}
+</TagEl>
+
+<style>
+  .tag-pill:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-glow);
+  }
+</style>

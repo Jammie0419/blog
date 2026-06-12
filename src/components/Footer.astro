@@ -1,0 +1,125 @@
+---
+const year = new Date().getFullYear();
+const links = [
+  { href: '/blog', label: '博客' },
+  { href: '/projects', label: '项目' },
+  { href: '/about', label: '关于' },
+  { href: '/contact', label: '联系' },
+];
+---
+
+<footer style="
+  border-top: 1px solid var(--border);
+  background: var(--bg-elevated);
+  margin-top: 4rem;
+">
+  <div class="container-narrow" style="padding: 2.5rem 0;">
+    <div style="
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+    ">
+      <!-- Left: Brand -->
+      <div>
+        <div class="flex items-center gap-2" style="margin-bottom: 0.75rem;">
+          <span class="crosshair" style="width:12px; height:12px;"></span>
+          <span style="font-family: var(--font-mono); font-weight: 600; font-size: 0.85rem; color: var(--text);">
+            ~/blog
+          </span>
+        </div>
+        <p style="
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          color: var(--text-muted);
+          line-height: 1.8;
+        ">
+          <span class="status-dot"></span>System Status: Operational<br />
+          Built with Astro &amp; Blueprint CSS
+        </p>
+      </div>
+
+      <!-- Center: Links -->
+      <nav style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+        {links.map(link => (
+          <a
+            href={link.href}
+            style="
+              font-family: var(--font-mono);
+              font-size: 0.75rem;
+              color: var(--text-dim);
+              letter-spacing: 0.05em;
+              text-decoration: none;
+              transition: color 0.2s ease;
+            "
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Right: Social -->
+      <div style="display: flex; gap: 0.75rem;">
+        <a href="https://github.com" target="_blank" rel="noopener" aria-label="GitHub" style="
+          width: 32px; height: 32px;
+          display: flex; align-items: center; justify-content: center;
+          border: 1px solid var(--border);
+          border-radius: 4px;
+          color: var(--text-dim);
+          font-size: 0.9rem;
+          transition: all 0.2s ease;
+          text-decoration: none;
+        ">
+          GH
+        </a>
+        <a href="mailto:your@email.com" aria-label="Email" style="
+          width: 32px; height: 32px;
+          display: flex; align-items: center; justify-content: center;
+          border: 1px solid var(--border);
+          border-radius: 4px;
+          color: var(--text-dim);
+          font-size: 0.75rem;
+          font-family: var(--font-mono);
+          transition: all 0.2s ease;
+          text-decoration: none;
+        ">
+          @
+        </a>
+      </div>
+    </div>
+
+    <!-- Bottom: Copyright -->
+    <div style="
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    ">
+      <span style="
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: var(--text-muted);
+      ">
+        © {year} All rights reserved.
+      </span>
+      <span style="
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: var(--text-muted);
+      ">
+        v1.0.0
+      </span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer a:hover {
+    color: var(--accent) !important;
+    border-color: var(--accent) !important;
+  }
+</style>

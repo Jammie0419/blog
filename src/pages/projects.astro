@@ -1,0 +1,224 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Project {
+  name: string;
+  description: string;
+  tech: string[];
+  highlights: string[];
+  github?: string;
+  demo?: string;
+  icon: string;
+}
+
+const projects: Project[] = [
+  {
+    name: '高并发 API 网关',
+    description: '基于 Go 的高性能 API 网关，支持限流、鉴权、负载均衡，单节点 QPS 10w+。采用插件化架构设计，支持动态配置热加载。',
+    tech: ['Go', 'gRPC', 'Redis', 'Etcd', 'Prometheus'],
+    highlights: [
+      '单节点 QPS 突破 10 万，P99 延迟 < 5ms',
+      '支持令牌桶/漏桶多种限流算法',
+      '插件化架构，支持热插拔',
+      '集成 Prometheus 监控指标采集',
+    ],
+    github: 'https://github.com',
+    icon: '⚙',
+  },
+  {
+    name: '微服务脚手架',
+    description: 'Spring Cloud 微服务最佳实践模板，集成服务发现、配置中心、链路追踪等核心组件，开箱即用。',
+    tech: ['Java', 'Spring Cloud', 'Docker', 'MySQL', 'Redis'],
+    highlights: [
+      '集成 Nacos 服务注册与配置中心',
+      'SkyWalking 链路追踪接入',
+      '统一异常处理与全局响应封装',
+      'Docker Compose 一键启动开发环境',
+    ],
+    github: 'https://github.com',
+    icon: '◈',
+  },
+  {
+    name: '分布式任务调度系统',
+    description: '自研分布式任务调度平台，支持 Cron 表达式、任务分片、失败重试、执行日志可视化。',
+    tech: ['Java', 'Quartz', 'ZooKeeper', 'Vue.js'],
+    highlights: [
+      '支持任务分片与并行执行',
+      '失败自动重试与告警通知',
+      'Web 控制台可视化任务管理',
+      '执行日志实时查看与分析',
+    ],
+    github: 'https://github.com',
+    demo: 'https://demo.example.com',
+    icon: '◷',
+  },
+  {
+    name: '实时数据管道',
+    description: '基于 Kafka + Flink 的实时数据处理管道，支持多数据源接入、实时计算与结果输出。',
+    tech: ['Kafka', 'Flink', 'ClickHouse', 'Docker'],
+    highlights: [
+      '支持 MySQL Binlog/CDC 实时接入',
+      'Flink 实时聚合与窗口计算',
+      'ClickHouse 存储，查询性能提升 10x',
+      '容器化部署，弹性扩缩容',
+    ],
+    github: 'https://github.com',
+    icon: '⟐',
+  },
+  {
+    name: '个人博客系统',
+    description: '从零搭建的个人技术博客，使用 Astro 静态站点生成，部署于 Vercel，追求极致性能与开发体验。',
+    tech: ['Astro', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+    highlights: [
+      '静态生成，Lighthouse 评分 100',
+      'Blueprint 设计风格',
+      'Markdown/MDX 内容管理',
+      '暗色/亮色主题切换',
+    ],
+    github: 'https://github.com',
+    demo: '/',
+    icon: '✎',
+  },
+];
+---
+
+<BaseLayout title="项目 - 我的作品" description="我参与开发和主导的技术项目">
+  <div class="container-narrow" style="padding-top: 3rem; padding-bottom: 4rem;">
+    <!-- Header -->
+    <header style="margin-bottom: 3rem;">
+      <h1 style="
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+      ">
+        <span style="color: var(--accent); margin-right: 0.5rem;">//</span>
+        项目集
+      </h1>
+      <p style="
+        font-size: 0.95rem;
+        color: var(--text-dim);
+      ">
+        我参与开发和主导的技术项目，涵盖高并发系统、微服务架构、数据处理等领域。
+      </p>
+      <div style="height: 1px; background: var(--border); margin-top: 1.5rem;"></div>
+    </header>
+
+    <!-- Projects -->
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+      {projects.map((project, i) => (
+        <div class="bp-card" style="padding: 2rem;">
+          <!-- Project header -->
+          <div style="
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            margin-bottom: 1.25rem;
+          ">
+            <div style="
+              width: 48px;
+              height: 48px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border: 1px solid var(--accent);
+              border-radius: 8px;
+              color: var(--accent);
+              font-size: 1.25rem;
+              flex-shrink: 0;
+            ">
+              {project.icon}
+            </div>
+            <div style="flex: 1;">
+              <h2 style="
+                font-family: var(--font-mono);
+                font-size: 1.2rem;
+                color: var(--text);
+                margin-bottom: 0.5rem;
+              ">
+                <span style="color: var(--text-muted); margin-right: 0.5rem; font-size: 0.8rem;">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                {project.name}
+              </h2>
+              <p style="
+                font-size: 0.9rem;
+                color: var(--text-dim);
+                line-height: 1.7;
+              ">
+                {project.description}
+              </p>
+            </div>
+          </div>
+
+          <!-- Tech stack -->
+          <div style="
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.25rem;
+          ">
+            {project.tech.map(t => (
+              <span class="tag" style="font-size: 0.75rem; padding: 0.25em 0.7em;">{t}</span>
+            ))}
+          </div>
+
+          <!-- Highlights -->
+          <div style="
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.25rem;
+          ">
+            <div style="
+              font-family: var(--font-mono);
+              font-size: 0.7rem;
+              color: var(--text-muted);
+              letter-spacing: 0.1em;
+              margin-bottom: 0.75rem;
+            ">
+              HIGHLIGHTS
+            </div>
+            <ul style="
+              list-style: none;
+              padding: 0;
+              margin: 0;
+            ">
+              {project.highlights.map(h => (
+                <li style="
+                  font-size: 0.85rem;
+                  color: var(--text-dim);
+                  padding: 0.3rem 0;
+                  padding-left: 1.25rem;
+                  position: relative;
+                ">
+                  <span style="
+                    position: absolute;
+                    left: 0;
+                    color: var(--accent);
+                  ">▹</span>
+                  {h}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Links -->
+          <div style="display: flex; gap: 0.75rem;">
+            {project.github && (
+              <a href={project.github} target="_blank" rel="noopener" class="bp-btn" style="font-size: 0.75rem;">
+                <span style="opacity: 0.7;">GH</span> 源码
+              </a>
+            )}
+            {project.demo && (
+              <a href={project.demo} target="_blank" rel="noopener" class="bp-btn" style="font-size: 0.75rem;">
+                <span style="opacity: 0.7;">↗</span> 演示
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
